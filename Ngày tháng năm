@@ -1,0 +1,47 @@
+        static bool LaNamNhuan(int nam)
+        {
+            if ((nam % 100 != 0 && nam % 4 == 0) || (nam % 400 == 0))
+                return true;
+            else return false;
+        }
+        static int TinhSoNgayTrongThang(int thang, int nam)
+        {
+            int SoNgayTrongThang = 31;
+            if(thang == 4 || thang == 6 || thang == 9 || thang == 11)
+                SoNgayTrongThang = 30;
+            else if (thang == 2)
+            {
+                if(LaNamNhuan(nam)) SoNgayTrongThang = 29;
+                else SoNgayTrongThang = 28;
+            }
+            return SoNgayTrongThang;
+        }
+        static int ThuTuNgayTrongNam(int ngay, int thang, int nam)
+        {
+            int tong = 0;
+            for (int i = 1; i < thang; i++)
+                tong += TinhSoNgayTrongThang(i, nam);
+            tong += ngay;
+            return tong;
+        }
+        static void Main(string[] args)
+        {
+            Console.Write("Nhap ngay: ");
+            int ngay = int.Parse(Console.ReadLine());
+            Console.Write("Nhap thang: ");
+            int thang = int.Parse(Console.ReadLine());
+            Console.Write("Nhap nam: ");
+            int nam = int.Parse(Console.ReadLine());
+            
+            if (LaNamNhuan(nam))
+                Console.WriteLine($"{nam} la nam nhuan");
+            else Console.WriteLine($"{nam} khong la nam nhuan");
+            
+            int SoNgay = TinhSoNgayTrongThang(thang, nam);
+            Console.WriteLine($"Thang {thang} co {SoNgay} ngay");
+            
+            int ThuTu = ThuTuNgayTrongNam(ngay, thang, nam);
+            Console.WriteLine($"Ngay {ngay}/{thang}/{nam} la ngay thu {ThuTu} trong nam");
+            
+            Console.ReadLine();
+        }

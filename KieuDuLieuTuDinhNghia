@@ -1,0 +1,84 @@
+    struct PhanSo
+        {
+            public int TuSo;
+            public int MauSo;
+        }
+    struct ToaDoDiem
+        {
+            public double x;
+            public double y;
+        }
+    struct TamGiac
+        {
+            public ToaDoDiem A;
+            public ToaDoDiem B;
+            public ToaDoDiem C;
+        }
+    static PhanSo NhapPhanSo(string ThongBao)
+        {
+            PhanSo A;
+            Console.WriteLine(ThongBao);
+            Console.Write("Tu so: ");
+            A.TuSo = int.Parse(Console.ReadLine());
+            Console.Write("Mau so: ");
+            A.MauSo = int.Parse(Console.ReadLine());
+            return A;
+        }
+    static void XuatPhanSo(PhanSo A)
+        {
+            Console.WriteLine($"{A.TuSo}/{A.MauSo}");
+        }
+    static PhanSo TinhTongPhanSo(PhanSo A, PhanSo B)
+        {
+            PhanSo S;
+            S.TuSo = A.TuSo * B.MauSo + A.MauSo * B.TuSo;
+            S.MauSo = A.MauSo * B.MauSo;
+            return S;
+        }
+    static ToaDoDiem NhapDiem(string ThongBao)
+        {
+            ToaDoDiem A;
+            Console.WriteLine(ThongBao);
+            Console.Write("Nhap x: ");
+            A.x = int.Parse(Console.ReadLine());
+            Console.Write("Nhap y: ");
+            A.y = int.Parse(Console.ReadLine());
+            return A;
+        }
+    static double TinhKhoangCach(ToaDoDiem A, ToaDoDiem B)
+        {
+            double KetQua = Math.Sqrt(Math.Pow((B.x - A.x), 2) + Math.Pow((B.y - A.y), 2));
+            return KetQua;
+        }
+    static TamGiac NhapTamGiac(string ThongBao)
+        {
+            TamGiac tg;
+            Console.WriteLine(ThongBao);
+            tg.A = NhapDiem("Nhap dinh A: ");
+            tg.B = NhapDiem("Nhap dinh B: ");
+            tg.C = NhapDiem("Nhap dinh C: ");
+            return tg;
+        }
+    static double ChuViTamGiac(TamGiac tg)
+        {
+            var a = TinhKhoangCach(tg.B, tg.C);
+            var b = TinhKhoangCach(tg.A, tg.C);
+            var C = TinhKhoangCach(tg.A, tg.B);
+            return a + b + C;
+        }
+    static void Main(string[] args)
+        {
+            PhanSo A = NhapPhanSo("Nhap phan so A: ");
+            PhanSo B = NhapPhanSo("Nhap phan so B: ");
+            PhanSo S = TinhTongPhanSo(A, B);
+            Console.Write("Tong hai phan so: ");
+            XuatPhanSo(S);
+            ToaDoDiem A = NhapDiem("Nhap diem A: ");
+            ToaDoDiem B = NhapDiem("Nhap diem B: ");
+            var AB = TinhKhoangCach(A, B);
+            Console.Write($"Khoang cach AB: {AB}");
+            TamGiac ABC = NhapTamGiac("Nhap tam giac ABC: ");
+            var ChuVi = ChuViTamGiac(ABC);
+            Console.Write($"Chu vi tam giac ABC: {ChuVi}");
+            Console.ReadLine();
+        }

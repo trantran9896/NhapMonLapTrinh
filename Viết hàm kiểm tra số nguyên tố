@@ -1,0 +1,48 @@
+        static bool LaSoNguyenTo(int n)
+        {
+            if (n < 2) return false;
+            for (int i = 2; i <= Math.Sqrt(n); i++)
+            {
+                if (n % i == 0) return false;
+            }
+            return true;
+        }
+        static void InDaySoNguyenTo(int n)
+        {
+            Console.Write("Day so nguyen to: ");
+            for (int i = 2; i <= n; i++)
+            {
+                if (LaSoNguyenTo(i))
+                    Console.Write($"{i} ");
+            }
+            Console.WriteLine();
+        }
+
+        static double TinhTBCDaySoNguyenTo(int n)
+        {
+            int tong = 0;
+            int dem = 0;
+            for (int i = 2; i <= n; i++)
+            {
+                if (LaSoNguyenTo(i))
+                {
+                    tong += i;
+                    dem++;
+                }
+            }
+            if (dem > 0) return (1.0 * tong) / dem;
+            else return 0;
+        }
+        static void Main(string[] args)
+        {
+            Console.Write("Nhap n: ");
+            int n = int.Parse(Console.ReadLine());
+            if (LaSoNguyenTo(n))
+                Console.WriteLine($"{n} la so nguyen to");
+            else
+                Console.WriteLine($"{n} khong la so nguyen to");
+            InDaySoNguyenTo(n);
+            double TBC = TinhTBCDaySoNguyenTo(n);
+            Console.Write($"TBC Day so nguyen to: {TBC}");
+            Console.ReadLine();
+        }

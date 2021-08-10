@@ -1,0 +1,45 @@
+        static int F(int x)
+        {
+            int kq;
+            kq = 2 * x + 1;
+            return kq;
+        }
+        static int Max(int a, int b)
+        {
+            int max = a;
+            if (max < b)
+            {
+                max = b;
+            }
+            return max;
+        }
+        static int TinhGiaiThua(int n)
+        {
+            int kq = 1;
+            for (int i = 1; i <= n; i++)
+            {
+                kq *= i;
+            }
+            return kq;
+        }
+        static int TinhTongGiaiThua(int n)
+        {
+            int tong = 0;
+            for (int i = 1; i <= n; i++)
+            {
+                tong += TinhGiaiThua(i);
+            }
+            return tong;
+        }
+        static void Main(string[] args)
+        {
+            int f1 = F(2);
+            int f2 = F(5);
+            int max = Max(f1, f2);
+            Console.WriteLine($"f1 = {f1}  f2 = {f2}  max = {max}");
+            Console.Write("Nhap n: ");
+            int n = int.Parse(Console.ReadLine());
+            Console.WriteLine($"Giai thua cua {n} la {TinhGiaiThua(n)}");
+            Console.WriteLine($"Tong giai thua cua {n} la {TinhTongGiaiThua(n)}");
+            Console.ReadLine();
+        }

@@ -1,0 +1,109 @@
+    struct PhanSo
+    {
+        public int TuSo;
+        public int MauSo;
+    }
+    class Program
+    {
+        static int DemUocSoChan(int n)
+        {
+            int dem = 0;
+            for (int i = 2; i <= n / 2; i++)
+            {
+                if (n % i == 0 && i % 2 == 0)
+                    dem++;
+            }
+            return dem;
+        }
+        static bool laSoNguyenTo(int n)
+        {
+            if (n < 2) return false;
+            for (int i = 2; i <= Math.Sqrt(n); i++)
+            {
+                if (n % i == 0) return false;
+            }
+            return true;
+        }
+        static int[] NhapMang()
+        {
+            int[] A;
+            Console.Write("Nhap so phan tu: ");
+            int n = int.Parse(Console.ReadLine());
+            A = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write($"Nhap A[{i}]: ");
+                A[i] = int.Parse(Console.ReadLine());
+            }
+            return A;
+        }
+        static double TinhTBCSoNguyenTo(int[] A)
+        {
+            int S = 0;
+            int dem = 0;
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (laSoNguyenTo(A[i]))
+                {
+                    S += A[i];
+                    dem++;
+                }
+            }
+            if (dem == 0) return 0;
+            return 1.0 * S / dem;
+        }
+        static PhanSo[] NhapMangPhanSo()
+        {
+            PhanSo[] A;
+            Console.Write("Nhap so phan tu: ");
+            int n = int.Parse(Console.ReadLine());
+            A = new PhanSo[n];
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine($"Nhap phan so A[{i}]: ");
+                Console.Write($"Nhap tu so A[{i}]: ");
+                A[i].TuSo = int.Parse(Console.ReadLine());
+                Console.Write($"Nhap mau so A[{i}]: ");
+                A[i].MauSo = int.Parse(Console.ReadLine());
+            }
+            return A;
+        }
+        static PhanSo TongPhanSo(PhanSo[] A)
+        {
+            PhanSo S = A[0];
+            for (int i = 1; i < A.Length; i++)
+            {
+                S.TuSo = S.TuSo * A[i].MauSo + S.MauSo * A[i].TuSo;
+                S.MauSo = S.MauSo * A[i].MauSo;
+            }
+            return S;
+        }
+        static void XuatPhanSo(PhanSo A)
+        {
+            int SoNguyen;
+            if (A.TuSo > A.MauSo)
+            {
+                SoNguyen = A.TuSo / A.MauSo;
+                A.TuSo = A.TuSo % A.MauSo;
+                Console.WriteLine($"{SoNguyen} + {A.TuSo} / {A.MauSo}");
+            }
+            else Console.WriteLine($"{A.TuSo} / {A.MauSo}");
+        }
+        static void Main(string[] args)
+        {
+            Console.Write("Nhap n: ");
+            int n = int.Parse(Console.ReadLine());
+            var UocSo = DemUocSoChan(n);
+            Console.WriteLine($"So uoc so chan cua n: {UocSo}");
+
+            int[] A = NhapMang();
+            var TBCSoNguyenTo = TinhTBCSoNguyenTo(A);
+            Console.WriteLine($"TBC so nguyen to: {TBCSoNguyenTo}");
+            
+            PhanSo[] A = NhapMangPhanSo();
+            PhanSo S = TongPhanSo(A);
+            Console.Write("Tong phan so: ");
+            XuatPhanSo(S);
+            Console.ReadLine();
+        }
+    }

@@ -1,0 +1,24 @@
+1. Console:
+Console.Title = "Xin chao";
+var hoten = Console.ReadLine();
+var xinchao = "Xin chao " + hoten + "\nDay la chuong trinh C# dau tien cua toi";
+Console.Write(xinchao);
+Console.ReadLine();
+
+2. Windows Form:
+NutBam.Click += (Th, Ts) => {
+var hoten = NhapTen.Text;
+var xinchao = "Xin chào " + hoten + "\nĐây là chương trình C# đầu tiên của tôi";
+LoiChao.Content = xinchao;
+};
+
+3. Web Form:
+<input id="NhapTen" runat="server" />
+<button id="NutBam" runat="server">Đồng ý</button>
+<div id="LoiChao" runat="server"></div>
+
+NutBam.ServerClick += (Th, Ts) =>{
+var hoten = NhapTen.Value;
+var xinchao = "Xin chào " + hoten + "<br/>Đây là chương trình C# đầu tiên của tôi";
+LoiChao.InnerHtml = xinchao;
+};

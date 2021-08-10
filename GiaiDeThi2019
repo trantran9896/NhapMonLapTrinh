@@ -1,0 +1,156 @@
+        // Câu 1: Viết hàm giải phương trình bậc 2: ax^2 + bx + c = 0
+        static void GiaiPhuongTrinhBacHai(double a, double b, double c)
+        {
+            double d = b * b - 4 * a * c;
+            if (d < 0) Console.WriteLine("Phuong trinh vo nghiem");
+            else if (d == 0) Console.WriteLine($"Phuong trinh co nghiem kep x = {-b / (2 * a)}");
+            else Console.WriteLine($"Phuong trinh co hai nghiem x1 = {(-b + Math.Sqrt(d)) / (2 * a)} va x2 = {(-b - Math.Sqrt(d)) / (2 * a)}");
+        }
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Giai phuong trinh bac 2: ");
+            Console.Write("Nhap a: ");
+            double a = double.Parse(Console.ReadLine());
+            Console.Write("Nhap b: ");
+            double b = double.Parse(Console.ReadLine());
+            Console.Write("Nhap c: ");
+            double c = double.Parse(Console.ReadLine());
+            Console.WriteLine($"{a}x^2 + {b}x + {c} = 0");
+            GiaiPhuongTrinhBacHai(a, b, c);
+            Console.ReadLine();
+        }
+        
+        // Câu 2: Viết hàm tính trung bình cộng các số nguyên tố có trong mảng một chiều
+        static int[] NhapMang()
+        {
+            int[] A;
+            Console.Write("Nhap so phan tu: ");
+            int N = int.Parse(Console.ReadLine());
+            A = new int[N];
+            for (int i = 0; i < A.Length; i++)
+            {
+                Console.Write($"Nhap A[{i}]: ");
+                A[i] = int.Parse(Console.ReadLine());
+            }
+            return A;
+        }
+        static bool LaSoNguyenTo(int n)
+        {
+            if (n < 2) return false;
+            for (int i = 2; i <= Math.Sqrt(n); i++)
+            {
+                if (n % i == 0) return false;
+            }
+            return true;
+        }
+        static double TinhTBCSoNguyenTo(int[] A)
+        {
+            int S = 0;
+            int dem = 0;
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (LaSoNguyenTo(A[i]))
+                {
+                    S += A[i];
+                    dem++;
+                }
+            }
+            if (dem == 0) return 0;
+            return (1.0 * S) / dem;
+        }
+        static void Main(string[] args)
+        {
+            int[] A;
+            A = NhapMang();
+            var TBC = TinhTBCSoNguyenTo(A);
+            Console.WriteLine($"TBC so nguyen to = {TBC}");
+            Console.ReadLine();
+        }
+        
+        // Câu 3: Viết hàm tính tổng các số nguyên nằm trên biên của ma trận N x M
+        static int[,] NhapMang()
+        {
+            int[,] A;
+            Console.Write("Nhap so dong: ");
+            int N = int.Parse(Console.ReadLine());
+            Console.Write("Nhap so cot: ");
+            int M = int.Parse(Console.ReadLine());
+            A = new int[N, M];
+            for (int i = 0; i < A.GetLength(0); i++)
+            {
+                for (int j = 0; j < A.GetLength(1); j++)
+                {
+                    Console.Write($"A[{i},{j}] = ");
+                    A[i, j] = int.Parse(Console.ReadLine());
+                }
+            }
+            return A;
+        }
+        static void XuatMang(int[,] A)
+        {
+            for (int i = 0; i < A.GetLength(0); i++)
+            {
+                for (int j = 0; j < A.GetLength(1); j++)
+                {
+                    Console.Write($"{A[i, j]}  ");
+                }
+                Console.WriteLine();
+            }
+        }
+        static int TinhTongBien(int[,] A)
+        {
+            int S = 0;
+            for (int j = 0; j < A.GetLength(1); j++)
+            {
+                S = S + A[0, j] + A[A.GetLength(0) - 1, j];
+            }
+            for (int i = 1; i < A.GetLength(0) - 1; i++)
+            {
+                S = S + A[i, 0] + A[i, A.GetLength(1) - 1];
+            }
+            return S;
+        }
+        static void Main(string[] args)
+        {
+            int[,] A;
+            A = NhapMang();
+            XuatMang(A);
+            var bien = TinhTongBien(A);
+            Console.WriteLine($"Tong bien cua ma tran la {bien}");
+            Console.ReadLine();
+        }
+        
+        // Câu 4: Viết hàm tính khoảng cách giữa hai điểm A và B
+        struct ToaDoDiem
+        {
+            public int x;
+            public int y;
+        }
+        class Program
+        {
+        static ToaDoDiem NhapDiem(string ThongBao)
+        {
+            ToaDoDiem A;
+            Console.WriteLine(ThongBao);
+            Console.Write("Nhap x: ");
+            A.x = int.Parse(Console.ReadLine());
+            Console.Write("Nhap y: ");
+            A.y = int.Parse(Console.ReadLine());
+            return A;
+        }
+        static double TinhKhoangCach(ToaDoDiem A, ToaDoDiem B)
+        {
+            int x = B.x - A.x;
+            int y = B.y - A.y;
+            double KC = Math.Sqrt(x * x + y * y);
+            return KC;
+        }
+        static void Main(string[] args)
+        {
+            ToaDoDiem A = NhapDiem("Nhap diem A: ");
+            ToaDoDiem B = NhapDiem("Nhap diem B: ");
+            var AB = TinhKhoangCach(A, B);
+            Console.Write($"Khoang cach AB: {AB}");
+            Console.ReadLine();
+        }
+    }

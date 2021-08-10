@@ -1,0 +1,49 @@
+            1. Đếm chữ số:
+            Console.Write("Nhap N: ");
+            int N = int.Parse(Console.ReadLine());
+            int dem = 0;
+            if (N == 0) dem = 1;
+            while (N > 0)
+            {
+                N = N / 10;
+                dem += 1;
+            }
+            Console.Write($"So chu so cua N la {dem}");
+            Console.ReadLine();
+            
+            2. Tổng các chữ số:
+            Console.Write("Nhap N: ");
+            int N = int.Parse(Console.ReadLine());
+            int tong = 0;
+            while (N > 0)
+            {
+                int dv = N % 10;
+                tong += dv;
+                N = N / 10;
+            }
+            Console.WriteLine($"Tong cac chu so cua N la {tong}");
+            Console.ReadLine();
+            
+            3. Đảo số:
+            Console.Write("Nhap N: ");
+            int N = int.Parse(Console.ReadLine());
+            int M = 0;
+            while (N > 0)
+            {
+                int dv = N % 10;
+                M = M * 10 + dv;
+                N = N / 10;
+            }
+            Console.WriteLine($"So dao cua N la {M}");
+            Console.ReadLine();
+
+            4. Bảng Cửu Chương:
+            for (int i = 1; i <= 9; i++)
+            {
+                for (int j = 2; j <= 9; j++)
+                {
+                    Console.Write($"{j} x {i} = {j * i}\t");
+                }
+                Console.WriteLine();
+            }
+            Console.ReadLine();

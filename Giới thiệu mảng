@@ -1,0 +1,68 @@
+        static int[] NhapMang()
+        {
+            int[] A;
+            Console.Write("Nhap so phan tu: ");
+            int N = int.Parse(Console.ReadLine());
+            A = new int[N];
+            for (int i = 0; i < A.Length; i++)
+            {
+                Console.Write($"Nhap A[{i}]: ");
+                A[i] = int.Parse(Console.ReadLine());
+            }
+            return A;
+        }
+        static void XuatMang(int[] A)
+        {
+            for (int i = 0; i < A.Length; i++)
+            {
+                Console.Write($"{A[i]}   ");
+            }
+        }
+        static int TinhTongMang(int[] A)
+        {
+            int S = 0;
+            for (int i = 0; i < A.Length; i++)
+            {
+                S += A[i];
+            }
+            return S;
+        }
+        static double TinhTBCChan(int[] A)
+        {
+            int S = 0;
+            int dem = 0;
+            for (int i = 0; i < A.Length; i++)
+            {
+                if (A[i] % 2 == 0)
+                {
+                    S += A[i];
+                    dem++;
+                }
+            }
+            if (dem == 0) return 0;
+            return (1.0 * S) / dem;
+        }
+        static int TimMin(int[] A)
+        {
+            int minIndex = 0;
+            for (int i = 1; i < A.Length; i++)
+            {
+                if (A[i] < A[minIndex])
+                    minIndex = i;
+            }
+            return minIndex;
+        }
+        static void Main(string[] args)
+        {
+            int[] A;
+            A = NhapMang();
+            XuatMang(A);
+            Console.WriteLine();
+            var S = TinhTongMang(A);
+            Console.WriteLine($"Tong mang = {S}");
+            var TBC = TinhTBCChan(A);
+            Console.WriteLine($"TBC chan = {TBC}");
+            var min = TimMin(A);
+            Console.WriteLine($"Min = {A[min]}");
+            Console.ReadLine();
+        }
